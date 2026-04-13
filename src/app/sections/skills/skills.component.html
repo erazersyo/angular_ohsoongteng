@@ -1,0 +1,10 @@
+<section class="skills" id="skills">
+  <h2>Skills</h2>
+
+  <div class="grid">
+    <div class="card" *ngFor="let skill of skills">
+      <img [src]="skill.icon" [alt]="skill.name" />
+      <p>{{ skill.name }}</p>
+    </div>
+  </div>
+</section>
