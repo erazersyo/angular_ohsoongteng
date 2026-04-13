@@ -1,12 +1,44 @@
 <section class="experience" id="experience">
-  <h2>Experience</h2>
+  <div class="section-header">
+    <span class="section-label">{{ langService.t('experience.label') }}</span>
+    <h2 class="section-title">
+      {{ langService.t('experience.titleMain') }} <span>{{ langService.t('experience.titleHighlight') }}</span>
+    </h2>
+  </div>
 
-  <div class="timeline">
-    <article class="exp-card" *ngFor="let item of experiences">
-      <h3>{{ item.role }}</h3>
-      <h4>{{ item.company }}</h4>
-      <p class="period">{{ item.period }}</p>
-      <p>{{ item.description }}</p>
-    </article>
+  <div class="cards" [class.visible]="visible">
+    <div
+      class="exp-card"
+      *ngFor="let item of experiences; let i = index"
+      [class.open]="openIndex === i"
+      [style.--i]="i"
+    >
+      <!-- Always-visible header — clicking toggles the body -->
+      <button class="card-header" (click)="toggleCard(i)" [attr.aria-expanded]="openIndex === i">
+        <div class="company-logo">
+          <img *ngIf="item.logo" [src]="item.logo" [alt]="item.company" (error)="$any($event.target).style.display='none'" />
+          <span class="logo-fallback" *ngIf="!item.logo">{{ item.company[0] }}</span>
+        </div>
+        <div class="header-left">
+          <h3>{{ langService.pick(item.role, item.roleJa) }}</h3>
+          <h4>{{ item.company }}</h4>
+        </div>
+        <div class="header-right">
+          <span class="period-badge">{{ langService.pick(item.period, item.periodJa) }}</span>
+          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </button>
+
+      <!-- Collapsible body -->
+      <div class="card-body">
+        <p>{{ langService.pick(item.description, item.descriptionJa) }}</p>
+        <div class="tags">
+          <span class="tag" *ngFor="let t of item.tags">{{ t }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

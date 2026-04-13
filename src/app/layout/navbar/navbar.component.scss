@@ -3,64 +3,171 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 16px 32px;
+  padding: 22px 48px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  backdrop-filter: blur(10px);
-  background: rgba(12, 12, 20, 0.72);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  color: white;
   z-index: 1000;
-  animation: slideDown 0.45s ease-out both;
+  transition: padding 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+  animation: slideDown 0.5s ease both;
+}
+
+.nav.scrolled {
+  padding: 14px 48px;
+  background: rgba(5, 8, 22, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(145, 94, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
 }
 
 .logo {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  color: #fff;
+  letter-spacing: 0.06em;
+  user-select: none;
+
+  span {
+    color: #915eff;
+  }
 }
 
-ul {
+.nav-links {
   display: flex;
-  gap: 24px;
+  gap: 36px;
   list-style: none;
   margin: 0;
   padding: 0;
+
+  a {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.25s ease;
+    padding-bottom: 2px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #915eff, #00d4ff);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    &:hover {
+      color: #fff;
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
 }
 
-a {
-  color: rgba(255, 255, 255, 0.82);
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.2s ease;
+/* Right side: lang toggle + hamburger */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
-a:hover {
-  color: #8b82ff;
+/* Language toggle pill */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 5px 13px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.25s ease, background 0.25s ease;
+
+  &:hover {
+    background: rgba(145, 94, 255, 0.1);
+    border-color: rgba(145, 94, 255, 0.35);
+  }
+
+  span {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.35);
+    transition: color 0.25s ease;
+
+    &.active {
+      color: #915eff;
+    }
+
+    &.sep {
+      color: rgba(255, 255, 255, 0.15);
+      font-weight: 300;
+    }
+  }
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 1100;
+
+  span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  &.active {
+    span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
 }
 
 @keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
 }
 
-@media (max-width: 720px) {
-  .nav {
-    padding: 14px 18px;
-  }
+@media (max-width: 768px) {
+  .nav { padding: 18px 24px; }
+  .nav.scrolled { padding: 12px 24px; }
 
-  ul {
-    gap: 12px;
-  }
+  .hamburger { display: flex; }
 
-  a {
-    font-size: 0.82rem;
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 270px;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    background: rgba(5, 8, 22, 0.97);
+    backdrop-filter: blur(24px);
+    border-left: 1px solid rgba(145, 94, 255, 0.12);
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+    a { font-size: 1.1rem; }
+
+    &.open { right: 0; }
   }
 }

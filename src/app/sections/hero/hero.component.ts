@@ -1,41 +1,83 @@
-import { Component } from '@angular/core';
-import { gsap } from 'gsap';
+import { Component, OnInit, OnDestroy, inject, effect } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })
-export class HeroComponent {
-  ngAfterViewInit() {
-    gsap.from('.content h1', {
-      y: 20,
-      opacity: 0,
-      duration: 0.6,
-    });
+export class HeroComponent implements OnInit, OnDestroy {
+  langService = inject(LanguageService);
 
-    gsap.from('.content h2', {
-      y: 50,
-      opacity: 0,
-      duration: 0.9,
-      delay: 0.2,
-    });
+  private rolesEn = ['Software Developer', 'System Engineer', 'Frontend Engineer'];
+  private rolesJa = ['ソフトウェアデベロッパー', 'システムエンジニア', 'フロントエンドエンジニア'];
 
-    gsap.from('.content p', {
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      delay: 0.4,
-    });
+  currentRole = '';
+  private roleIndex = 0;
+  private charIndex = 0;
+  private isDeleting = false;
+  private timer: any;
+  private prevLang: 'en' | 'ja' | null = null;
 
-    gsap.from('.buttons a', {
-      y: 20,
-      opacity: 0,
-      duration: 0.6,
-      delay: 0.6,
-      stagger: 0.12,
+  constructor() {
+    // Restart typewriter whenever language changes
+    effect(() => {
+      const lang = this.langService.lang();
+      if (this.prevLang !== null && this.prevLang !== lang) {
+        this.restartTypewriter();
+      }
+      this.prevLang = lang;
     });
+  }
+
+  get roles() {
+    return this.langService.lang() === 'ja' ? this.rolesJa : this.rolesEn;
+  }
+
+  get resumeHref() {
+    return this.langService.lang() === 'ja' ? 'assets/resume-ja.pdf' : 'assets/resume.pdf';
+  }
+
+  ngOnInit() {
+    this.typeRole();
+  }
+
+  ngOnDestroy() {
+    clearTimeout(this.timer);
+  }
+
+  private restartTypewriter() {
+    clearTimeout(this.timer);
+    this.currentRole = '';
+    this.roleIndex = 0;
+    this.charIndex = 0;
+    this.isDeleting = false;
+    this.timer = setTimeout(() => this.typeRole(), 300);
+  }
+
+  private typeRole() {
+    const full = this.roles[this.roleIndex];
+
+    if (this.isDeleting) {
+      this.currentRole = full.substring(0, --this.charIndex);
+    } else {
+      this.currentRole = full.substring(0, ++this.charIndex);
+    }
+
+    let delay = this.isDeleting ? 55 : 95;
+
+    if (!this.isDeleting && this.charIndex === full.length) {
+      delay = 1800;
+      this.isDeleting = true;
+    } else if (this.isDeleting && this.charIndex === 0) {
+      this.isDeleting = false;
+      this.roleIndex = (this.roleIndex + 1) % this.roles.length;
+      delay = 400;
+    }
+
+    this.timer = setTimeout(() => this.typeRole(), delay);
   }
 }

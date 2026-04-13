@@ -1,59 +1,105 @@
 .skills {
-  padding: 110px 40px 90px;
-  background: #111427;
-  color: white;
+  padding: 110px 48px;
+  background: #070a1a;
+  color: #fff;
+}
+
+.section-header {
   text-align: center;
+  margin-bottom: 64px;
+}
+
+.section-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #915eff;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  margin: 0;
+
+  span {
+    background: linear-gradient(135deg, #915eff, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 22px;
-  margin-top: 40px;
-  max-width: 900px;
-  margin-inline: auto;
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.card {
-  padding: 26px 16px;
-  border-radius: 16px;
-  background: linear-gradient(150deg, #1c2138, #191d2f);
-  transition: 0.3s;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+.skill-card {
+  padding: 28px 16px 22px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  text-align: center;
+  cursor: default;
   opacity: 0;
-  animation: cardIn 0.55s ease forwards;
+  transform: translateY(18px);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+
+  &:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 14px 36px rgba(145, 94, 255, 0.28);
+    border-color: rgba(145, 94, 255, 0.4);
+    background: rgba(145, 94, 255, 0.08);
+
+    img { transform: scale(1.12); }
+  }
 }
 
-.card:nth-child(1) { animation-delay: 0.05s; }
-.card:nth-child(2) { animation-delay: 0.12s; }
-.card:nth-child(3) { animation-delay: 0.19s; }
-.card:nth-child(4) { animation-delay: 0.26s; }
-.card:nth-child(5) { animation-delay: 0.33s; }
+.grid.visible .skill-card {
+  animation: cardIn 0.5s ease forwards;
+  animation-delay: calc(var(--i) * 0.055s);
+}
+
+.icon-wrap {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 img {
-  width: 52px;
-  height: 52px;
+  width: 46px;
+  height: 46px;
   object-fit: contain;
-  margin-bottom: 10px;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
+  transition: transform 0.3s ease;
 }
 
 p {
   margin: 0;
+  font-size: 0.82rem;
   font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
 }
 
 @keyframes cardIn {
-  from {
-    opacity: 0;
-    transform: translateY(14px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .skills { padding: 80px 20px; }
+  .grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .skill-card { padding: 20px 10px; }
 }

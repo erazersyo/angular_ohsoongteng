@@ -1,10 +1,25 @@
-<nav class="nav">
-  <div class="logo">OST.</div>
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
+<nav class="nav" [class.scrolled]="isScrolled">
+  <div class="logo">Oh Soong Teng<span>.</span></div>
+
+  <ul class="nav-links" [class.open]="menuOpen">
+    <li><a href="#home"       (click)="close()">{{ langService.t('nav.home')       }}</a></li>
+    <li><a href="#skills"     (click)="close()">{{ langService.t('nav.skills')     }}</a></li>
+    <li><a href="#experience" (click)="close()">{{ langService.t('nav.experience') }}</a></li>
+    <li><a href="#projects"   (click)="close()">{{ langService.t('nav.projects')   }}</a></li>
+    <li><a href="#contact"    (click)="close()">{{ langService.t('nav.contact')    }}</a></li>
   </ul>
+
+  <div class="nav-right">
+    <button class="lang-toggle" (click)="langService.toggle()" aria-label="Switch language">
+      <span [class.active]="langService.lang() === 'en'">EN</span>
+      <span class="sep">|</span>
+      <span [class.active]="langService.lang() === 'ja'">JP</span>
+    </button>
+
+    <button class="hamburger" (click)="toggle()" [class.active]="menuOpen" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
 </nav>

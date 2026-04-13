@@ -1,103 +1,316 @@
 .hero {
-  height: 100vh;
+  position: relative;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 20px;
-  background:
-    radial-gradient(circle at 20% 0%, rgba(124, 58, 237, 0.35), transparent 38%),
-    radial-gradient(circle at 85% 15%, rgba(37, 99, 235, 0.28), transparent 35%),
-    #0b0d16;
-  color: white;
-  text-align: center;
+  overflow: hidden;
+  padding: 120px 64px 80px;
+  background: #050816;
 }
 
+/* Floating orb background */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: orbFloat 9s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(145, 94, 255, 0.3) 0%, transparent 70%);
+  top: -160px;
+  left: -160px;
+  filter: blur(60px);
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.22) 0%, transparent 70%);
+  bottom: -120px;
+  right: -120px;
+  filter: blur(60px);
+  animation-delay: -3.5s;
+}
+
+.orb-3 {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(145, 94, 255, 0.18) 0%, transparent 70%);
+  top: 42%;
+  left: 55%;
+  filter: blur(50px);
+  animation-delay: -6s;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(28px, -22px) scale(1.04); }
+  66%       { transform: translate(-18px, 28px) scale(0.96); }
+}
+
+/* Two-column inner layout */
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 72px;
+  max-width: 1100px;
+  width: 100%;
+}
+
+/* ── Left: photo ── */
+.photo-col {
+  flex-shrink: 0;
+  animation: fadeLeft 0.8s ease 0.1s both;
+}
+
+.photo-wrap {
+  position: relative;
+  width: 300px;
+  height: 400px;
+}
+
+/* Soft radial glow sitting behind the image */
+.photo-glow {
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(
+    circle,
+    rgba(145, 94, 255, 0.38) 0%,
+    rgba(0, 212, 255, 0.18) 45%,
+    transparent 70%
+  );
+  filter: blur(32px);
+  border-radius: 50%;
+  animation: pulseGlow 4s ease-in-out infinite;
+  z-index: 0;
+}
+
+/* Morphing blob — no border, just shape + shadow */
+.profile-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: morphBlob 10s ease-in-out infinite;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    0 8px 24px rgba(145, 94, 255, 0.2);
+  /* dark placeholder until photo is added */
+  background: linear-gradient(135deg, #1c1535, #0d1022);
+}
+
+@keyframes morphBlob {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%       { border-radius: 40% 60% 70% 30% / 40% 70% 30% 60%; }
+  50%       { border-radius: 30% 70% 40% 60% / 70% 40% 60% 30%; }
+  75%       { border-radius: 70% 30% 60% 40% / 30% 60% 40% 70%; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.65; transform: scale(1); }
+  50%       { opacity: 1;    transform: scale(1.06); }
+}
+
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Right: content ── */
 .content {
-  max-width: 760px;
+  flex: 1;
+  text-align: left;
 }
 
-.tag {
-  margin-bottom: 14px;
-  font-size: 0.78rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #c4b5fd;
+.greeting {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  animation: fadeUp 0.6s ease 0.2s both;
 }
 
-.content h1 {
-  font-size: 1.2rem;
-  opacity: 0.9;
-  animation: fadeUp 0.6s ease both;
-}
-
-.content h2 {
-  font-size: clamp(2.6rem, 8vw, 5.1rem);
+.name {
+  font-size: clamp(2.4rem, 6vw, 4.6rem);
   font-weight: 800;
-  margin: 10px 0;
-  line-height: 1.02;
-  background: linear-gradient(120deg, #ffffff, #a5b4fc);
-  background-clip: text;
+  line-height: 1.05;
+  margin: 0 0 16px;
+  background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 45%, #00d4ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: fadeUp 0.8s ease both;
+  background-clip: text;
+  animation: fadeUp 0.7s ease 0.3s both;
+}
+
+.name-postfix {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.08em;
+  margin: -10px 0 18px;
+  animation: fadeUp 0.7s ease 0.35s both;
+}
+
+.role-line {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-weight: 600;
+  color: #915eff;
+  min-height: 2em;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-bottom: 20px;
+  animation: fadeUp 0.7s ease 0.4s both;
+}
+
+.cursor {
+  color: #00d4ff;
+  animation: blink 1s step-end infinite;
+  font-weight: 300;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
 
 .subtitle {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.97rem;
   max-width: 500px;
-  margin: auto;
-  opacity: 0.9;
-  color: #cbd5e1;
-  animation: fadeUp 1s ease both;
+  line-height: 1.8;
+  margin: 0 0 36px;
+  animation: fadeUp 0.7s ease 0.5s both;
 }
 
-.buttons {
-  margin-top: 30px;
+.cta-buttons {
   display: flex;
-  justify-content: center;
+  gap: 14px;
   flex-wrap: wrap;
-  gap: 12px;
+  animation: fadeUp 0.7s ease 0.6s both;
 }
 
-a {
-  padding: 12px 24px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  text-decoration: none;
-  display: inline-block;
+.btn {
+  padding: 13px 32px;
+  border-radius: 12px;
+  font-size: 0.93rem;
   font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  letter-spacing: 0.02em;
 }
 
-.primary {
-  background: linear-gradient(135deg, #7c3aed, #2563eb);
-  color: white;
-  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.35);
+.btn-primary {
+  background: linear-gradient(135deg, #915eff, #00d4ff);
+  color: #fff;
+  box-shadow: 0 0 28px rgba(145, 94, 255, 0.45);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 50px rgba(145, 94, 255, 0.7);
+  }
 }
 
-.secondary {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: white;
+.btn-secondary {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(145, 94, 255, 0.55);
+
+  &:hover {
+    background: rgba(145, 94, 255, 0.12);
+    border-color: #915eff;
+    transform: translateY(-3px);
+  }
 }
 
-.primary:hover,
-.secondary:hover {
-  transform: translateY(-2px);
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2.2s ease infinite;
+
+  span {
+    display: block;
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(145, 94, 255, 0.4);
+    border-radius: 13px;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 8px;
+      background: #915eff;
+      border-radius: 2px;
+      animation: scrollDot 2.2s ease infinite;
+    }
+  }
+}
+
+@keyframes scrollDot {
+  0%   { opacity: 1; top: 6px; }
+  100% { opacity: 0; top: 24px; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(7px); }
 }
 
 @keyframes fadeUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 700px) {
-  .content h2 {
-    font-size: 2.5rem;
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .hero { padding: 120px 32px 80px; }
+
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 44px;
   }
+
+  .photo-wrap {
+    width: 220px;
+    height: 300px;
+  }
+
+  .content { text-align: center; }
+
+  .role-line { justify-content: center; }
+
+  .subtitle { margin-inline: auto; }
+
+  .cta-buttons { justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 100px 20px 70px; }
+
+  .photo-wrap { width: 180px; height: 240px; }
+
+  .name { font-size: 2.4rem; }
+
+  .btn { padding: 12px 24px; font-size: 0.88rem; }
 }
