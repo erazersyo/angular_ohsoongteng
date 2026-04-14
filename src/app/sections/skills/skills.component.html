@@ -1,4 +1,4 @@
-<section class="skills" id="skills">
+<section class="skills" id="skills" [class.visible]="visible">
   <div class="section-header">
     <span class="section-label">{{ langService.t('skills.label') }}</span>
     <h2 class="section-title">
@@ -6,9 +6,10 @@
     </h2>
   </div>
 
-  <div class="grid" [class.visible]="visible">
+  <div class="grid">
     <div
       class="skill-card"
+      appTilt
       *ngFor="let skill of skills; let i = index"
       [style.--i]="i"
     >

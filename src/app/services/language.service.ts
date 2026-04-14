@@ -31,4 +31,8 @@ export class LanguageService {
   pick(en: string, ja: string): string {
     return this.lang() === 'ja' ? ja : en;
   }
+
+  pickArr(en: string[], ja: string[]): string[] {
+    return this.lang() === 'ja' ? ja : en;
+  }
 }

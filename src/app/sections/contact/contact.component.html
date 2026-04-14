@@ -1,4 +1,4 @@
-<section class="contact" id="contact">
+<section class="contact" id="contact" [class.visible]="visible">
   <div class="section-header">
     <span class="section-label">{{ langService.t('contact.label') }}</span>
     <h2 class="section-title">
@@ -7,7 +7,7 @@
     <p class="subtitle">{{ langService.t('contact.subtitle') }}</p>
   </div>
 
-  <div class="contact-wrapper" [class.visible]="visible">
+  <div class="contact-wrapper">
     <form class="form" (ngSubmit)="onSubmit()">
       <div class="form-row">
         <div class="form-group">

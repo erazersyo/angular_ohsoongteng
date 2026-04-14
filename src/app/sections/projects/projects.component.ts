@@ -1,11 +1,12 @@
 import { Component, OnInit, ElementRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../services/language.service';
+import { TiltDirective } from '../../directives/tilt.directive';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TiltDirective],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
 })

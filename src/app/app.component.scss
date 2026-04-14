@@ -1,3 +1,12 @@
 :host {
   display: block;
 }
+
+.site-content {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+
+  &.visible {
+    opacity: 1;
+  }
+}

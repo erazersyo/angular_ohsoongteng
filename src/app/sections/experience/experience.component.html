@@ -1,4 +1,4 @@
-<section class="experience" id="experience">
+<section class="experience" id="experience" [class.visible]="visible">
   <div class="section-header">
     <span class="section-label">{{ langService.t('experience.label') }}</span>
     <h2 class="section-title">
@@ -6,37 +6,92 @@
     </h2>
   </div>
 
-  <div class="cards" [class.visible]="visible">
+  <div class="cards">
     <div
       class="exp-card"
       *ngFor="let item of experiences; let i = index"
       [class.open]="openIndex === i"
       [style.--i]="i"
     >
-      <!-- Always-visible header — clicking toggles the body -->
+      <!-- Always-visible header -->
       <button class="card-header" (click)="toggleCard(i)" [attr.aria-expanded]="openIndex === i">
         <div class="company-logo">
-          <img *ngIf="item.logo" [src]="item.logo" [alt]="item.company" (error)="$any($event.target).style.display='none'" />
-          <span class="logo-fallback" *ngIf="!item.logo">{{ item.company[0] }}</span>
+          <img *ngIf="item.logo" [src]="item.logo" [alt]="item.companyEn"
+            (error)="$any($event.target).style.display='none'" />
+          <span class="logo-fallback" *ngIf="!item.logo">{{ item.companyEn[0] }}</span>
         </div>
-        <div class="header-left">
-          <h3>{{ langService.pick(item.role, item.roleJa) }}</h3>
-          <h4>{{ item.company }}</h4>
+
+        <div class="header-main">
+          <div class="header-top">
+            <h3 class="role">{{ langService.pick(item.role, item.roleJa) }}</h3>
+            <span class="period-badge">{{ langService.pick(item.period, item.periodJa) }}</span>
+          </div>
+          <div class="header-bottom">
+            <a class="company-link"
+              [href]="item.companyUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              (click)="$event.stopPropagation()">
+              {{ langService.pick(item.companyEn, item.company) }}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+            <div class="tags-inline">
+              <span class="tag" *ngFor="let t of item.tags">{{ t }}</span>
+            </div>
+          </div>
         </div>
-        <div class="header-right">
-          <span class="period-badge">{{ langService.pick(item.period, item.periodJa) }}</span>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </button>
 
       <!-- Collapsible body -->
       <div class="card-body">
-        <p>{{ langService.pick(item.description, item.descriptionJa) }}</p>
-        <div class="tags">
-          <span class="tag" *ngFor="let t of item.tags">{{ t }}</span>
+        <p class="description">{{ langService.pick(item.description, item.descriptionJa) }}</p>
+
+        <!-- Key Projects & Clients -->
+        <div class="projects-section" *ngIf="item.projects && item.projects.length">
+          <h4 class="projects-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <path d="M8 21h8M12 17v4"/>
+            </svg>
+            {{ langService.pick('Key Projects & Clients', 'キープロジェクト・クライアント') }}
+          </h4>
+
+          <div class="project-item" *ngFor="let p of item.projects">
+            <div class="project-header">
+              <img *ngIf="p.logo" [src]="p.logo" [alt]="p.name" class="project-logo"
+                (error)="$any($event.target).style.display='none'" />
+              <a *ngIf="p.url" [href]="p.url" target="_blank" rel="noopener noreferrer"
+                class="project-name" (click)="$event.stopPropagation()">
+                {{ langService.pick(p.name, p.nameJa) }}
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+              <span *ngIf="!p.url" class="project-name no-link">{{ langService.pick(p.name, p.nameJa) }}</span>
+            </div>
+
+            <div class="project-tags">
+              <span class="tag tag-sm" *ngFor="let t of p.tags">{{ t }}</span>
+            </div>
+
+            <ul class="achievements">
+              <li *ngFor="let a of langService.pickArr(p.achievements, p.achievementsJa)">{{ a }}</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

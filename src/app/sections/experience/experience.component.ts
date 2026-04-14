@@ -12,11 +12,13 @@ import { LanguageService } from '../../services/language.service';
 export class ExperienceComponent implements OnInit {
   langService = inject(LanguageService);
   visible = false;
-  openIndex: number | null = 0; // first card open by default
+  openIndex: number | null = 0;
 
   experiences = [
     {
       company: '株式会社アジレット',
+      companyEn: 'Agirette Inc.',
+      companyUrl: 'https://agirette.co.jp',
       logo: 'assets/logos/agirette.png',
       role: 'System Engineer',
       roleJa: 'システムエンジニア',
@@ -27,9 +29,30 @@ export class ExperienceComponent implements OnInit {
       descriptionJa:
         '日本で企業向けソフトウェアシステムを構築し、多文化チームと協力してスケーラブルで高品質なソリューションを提供しています。',
       tags: ['Java', 'Spring Boot', 'SQL', 'Git'],
+      projects: [
+        {
+          name: 'Enterprise System Project',
+          nameJa: '業務システムプロジェクト',
+          url: '',
+          logo: '',
+          tags: ['Java', 'Spring Boot', 'Oracle DB'],
+          achievements: [
+            'Designed and implemented core modules for a large-scale enterprise system',
+            'Improved query performance by optimising SQL procedures and indexes',
+            'Collaborated with Japanese clients to gather requirements and deliver solutions',
+          ],
+          achievementsJa: [
+            '大規模業務システムのコアモジュールを設計・実装',
+            'SQLプロシージャとインデックスを最適化しクエリ性能を向上',
+            '日本語でクライアントと要件定義を行い、ソリューションを提供',
+          ],
+        },
+      ],
     },
     {
       company: 'Fusionex Group',
+      companyEn: 'Fusionex Group',
+      companyUrl: 'https://fusionexgroup.com',
       logo: 'assets/logos/fusionex.png',
       role: 'Software Developer',
       roleJa: 'ソフトウェアデベロッパー',
@@ -40,6 +63,25 @@ export class ExperienceComponent implements OnInit {
       descriptionJa:
         '最新のフロントエンド・バックエンド技術を活用し、迅速な開発サイクルでビジネス向けWebアプリケーションの開発・保守を担当しました。',
       tags: ['Angular', 'TypeScript', 'JavaScript', 'REST API'],
+      projects: [
+        {
+          name: 'Business Intelligence Dashboard',
+          nameJa: 'BIダッシュボード',
+          url: '',
+          logo: '',
+          tags: ['Angular', 'TypeScript', 'REST API', 'Chart.js'],
+          achievements: [
+            'Built interactive dashboards for real-time business data visualisation',
+            'Integrated multiple REST APIs and reduced data load time by 40%',
+            'Delivered features across multiple client projects within tight sprint cycles',
+          ],
+          achievementsJa: [
+            'リアルタイムビジネスデータを可視化するインタラクティブなダッシュボードを構築',
+            '複数のREST APIを統合し、データ読み込み時間を40%短縮',
+            'タイトなスプリントサイクルの中で複数のクライアントプロジェクトに機能を提供',
+          ],
+        },
+      ],
     },
   ];
 

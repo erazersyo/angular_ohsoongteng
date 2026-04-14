@@ -23,7 +23,6 @@ export class HeroComponent implements OnInit, OnDestroy {
   private prevLang: 'en' | 'ja' | null = null;
 
   constructor() {
-    // Restart typewriter whenever language changes
     effect(() => {
       const lang = this.langService.lang();
       if (this.prevLang !== null && this.prevLang !== lang) {
@@ -60,24 +59,19 @@ export class HeroComponent implements OnInit, OnDestroy {
 
   private typeRole() {
     const full = this.roles[this.roleIndex];
-
     if (this.isDeleting) {
       this.currentRole = full.substring(0, --this.charIndex);
     } else {
       this.currentRole = full.substring(0, ++this.charIndex);
     }
-
     let delay = this.isDeleting ? 55 : 95;
-
     if (!this.isDeleting && this.charIndex === full.length) {
-      delay = 1800;
-      this.isDeleting = true;
+      delay = 1800; this.isDeleting = true;
     } else if (this.isDeleting && this.charIndex === 0) {
       this.isDeleting = false;
       this.roleIndex = (this.roleIndex + 1) % this.roles.length;
       delay = 400;
     }
-
     this.timer = setTimeout(() => this.typeRole(), delay);
   }
 }

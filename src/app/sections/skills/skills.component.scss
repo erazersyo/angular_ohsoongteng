@@ -1,12 +1,22 @@
 .skills {
+  position: relative;
+  z-index: 1;
   padding: 110px 48px;
-  background: #070a1a;
+  background: transparent;
   color: #fff;
 }
 
 .section-header {
   text-align: center;
   margin-bottom: 64px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.skills.visible .section-header {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section-label {
@@ -42,32 +52,61 @@
 
 .skill-card {
   padding: 28px 16px 22px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
   text-align: center;
   cursor: default;
   opacity: 0;
-  transform: translateY(18px);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease,
-    background 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+
+  /* Shimmer sweep */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    transform: skewX(-15deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+
+  /* Top specular line */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; width: 80%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    pointer-events: none;
+  }
 
   &:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 14px 36px rgba(145, 94, 255, 0.28);
+    background: rgba(145, 94, 255, 0.12);
     border-color: rgba(145, 94, 255, 0.4);
-    background: rgba(145, 94, 255, 0.08);
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(145, 94, 255, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
 
-    img { transform: scale(1.12); }
+    &::before { left: 150%; }
+
+    img { transform: scale(1.18) translateY(-3px); filter: drop-shadow(0 6px 16px rgba(145, 94, 255, 0.5)); }
   }
 }
 
-.grid.visible .skill-card {
+.skills.visible .skill-card {
   animation: cardIn 0.5s ease forwards;
-  animation-delay: calc(var(--i) * 0.055s);
+  animation-delay: calc(0.25s + var(--i) * 0.055s);
 }
 
 .icon-wrap {

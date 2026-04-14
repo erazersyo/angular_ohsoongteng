@@ -1,0 +1,60 @@
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #050816;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  will-change: transform;
+
+  /* Subtle grid lines — same vibe as the site background */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(145, 94, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(145, 94, 255, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+}
+
+.letters {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  line-height: 1;
+}
+
+.letter {
+  font-size: clamp(5rem, 14vw, 9rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 45%, #915eff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  will-change: transform, opacity;
+  display: inline-block;
+}
+
+.dot {
+  font-size: clamp(5rem, 14vw, 9rem);
+  font-weight: 900;
+  color: #00d4ff;
+  line-height: 1;
+  display: inline-block;
+  margin: 0 2px;
+}
+
+.tagline {
+  font-size: clamp(0.75rem, 2vw, 0.95rem);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
