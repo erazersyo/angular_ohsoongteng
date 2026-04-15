@@ -11,6 +11,10 @@ export class LanguageService {
     this.lang.set(this.lang() === 'en' ? 'ja' : 'en');
   }
 
+  setLang(l: Lang) {
+    this.lang.set(l);
+  }
+
   /**
    * Look up a dot-separated key in the translations file.
    * e.g. t('nav.home'), t('contact.sendBtn')

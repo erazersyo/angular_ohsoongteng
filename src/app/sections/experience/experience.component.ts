@@ -17,9 +17,9 @@ export class ExperienceComponent implements OnInit {
   experiences = [
     {
       company: '株式会社アジレット',
-      companyEn: 'Agirette Inc.',
-      companyUrl: 'https://agirette.co.jp',
-      logo: 'assets/logos/agirette.png',
+      companyEn: 'Agile & Team（Japan）',
+      companyUrl: 'https://agile-t.com',
+      logo: 'assets/logos/agilet.png',
       role: 'System Engineer',
       roleJa: 'システムエンジニア',
       period: 'Sep 2024 – Present',
@@ -28,14 +28,14 @@ export class ExperienceComponent implements OnInit {
         'Building enterprise software systems in Japan, collaborating across multicultural teams to deliver scalable, high-quality solutions.',
       descriptionJa:
         '日本で企業向けソフトウェアシステムを構築し、多文化チームと協力してスケーラブルで高品質なソリューションを提供しています。',
-      tags: ['Java', 'Spring Boot', 'SQL', 'Git'],
+      tags: [],
       projects: [
         {
-          name: 'Enterprise System Project',
+          name: 'Minna no Ginko',
           nameJa: '業務システムプロジェクト',
-          url: '',
+          url: 'https://www.minna-no-ginko.com',
           logo: '',
-          tags: ['Java', 'Spring Boot', 'Oracle DB'],
+          tags: ['Angular', 'Javascript', 'TypeScript', 'HTML', 'CSS', 'GitLab', 'Google Cloud Platform', 'MySQL'],
           achievements: [
             'Designed and implemented core modules for a large-scale enterprise system',
             'Improved query performance by optimising SQL procedures and indexes',
@@ -51,10 +51,10 @@ export class ExperienceComponent implements OnInit {
     },
     {
       company: 'Fusionex Group',
-      companyEn: 'Fusionex Group',
-      companyUrl: 'https://fusionexgroup.com',
-      logo: 'assets/logos/fusionex.png',
-      role: 'Software Developer',
+      companyEn: 'Fusionex Group（Malaysia）',
+      companyUrl: 'https://www.linkedin.com/company/fusionex-group/',
+      logo: 'assets/logos/fusionex.jpg',
+      role: 'Fullstack Developer',
       roleJa: 'ソフトウェアデベロッパー',
       period: 'Aug 2022 – Feb 2024',
       periodJa: '2022年8月〜2024年2月',
@@ -62,14 +62,14 @@ export class ExperienceComponent implements OnInit {
         'Developed and maintained business web applications in fast-paced delivery cycles using modern frontend and backend technologies.',
       descriptionJa:
         '最新のフロントエンド・バックエンド技術を活用し、迅速な開発サイクルでビジネス向けWebアプリケーションの開発・保守を担当しました。',
-      tags: ['Angular', 'TypeScript', 'JavaScript', 'REST API'],
+      tags: [],
       projects: [
         {
-          name: 'Business Intelligence Dashboard',
+          name: 'Customs Solution Malaysia',
           nameJa: 'BIダッシュボード',
           url: '',
           logo: '',
-          tags: ['Angular', 'TypeScript', 'REST API', 'Chart.js'],
+          tags: ['Vue', 'Node', 'Javascript','TypeScript', 'HTML', 'CSS', 'GitLab', 'MongoDB'],
           achievements: [
             'Built interactive dashboards for real-time business data visualisation',
             'Integrated multiple REST APIs and reduced data load time by 40%',

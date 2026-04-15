@@ -10,13 +10,13 @@
   text-align: center;
   margin-bottom: 56px;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(70px) scale(0.95);
+  transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .contact.visible .section-header {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .section-label {
@@ -63,13 +63,13 @@
   border: 1px solid rgba(255, 255, 255, 0.09);
   box-shadow: 0 8px 48px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.6s ease 0.25s, transform 0.6s ease 0.25s;
+  transform: translateY(70px) scale(0.95);
+  transition: opacity 0.75s cubic-bezier(0.23, 1, 0.32, 1) 0.2s, transform 0.75s cubic-bezier(0.23, 1, 0.32, 1) 0.2s;
 }
 
 .contact.visible .contact-wrapper {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 /* Form */

@@ -1,11 +1,2 @@
-<app-intro *ngIf="showIntro" (done)="onIntroDone()"></app-intro>
 <app-particle-bg></app-particle-bg>
-
-<div class="site-content" [class.visible]="contentVisible">
-  <app-navbar></app-navbar>
-  <app-hero></app-hero>
-  <app-experience></app-experience>
-  <app-skills></app-skills>
-  <app-projects></app-projects>
-  <app-contact></app-contact>
-</div>
+<router-outlet></router-outlet>

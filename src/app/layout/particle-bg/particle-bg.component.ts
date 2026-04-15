@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/co
 interface Particle {
   x: number; y: number;
   vx: number; vy: number;
+  bvx: number; bvy: number;   // base drift velocity
   size: number; opacity: number;
 }
 
@@ -53,14 +54,18 @@ export class ParticleBgComponent implements OnInit, OnDestroy {
 
   private spawnParticles(w: number, h: number) {
     const count = Math.min(Math.floor((w * h) / 8000), 180);
-    this.particles = Array.from({ length: count }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.32,
-      vy: (Math.random() - 0.5) * 0.32,
-      size: Math.random() * 1.4 + 0.4,
-      opacity: Math.random() * 0.45 + 0.15,
-    }));
+    this.particles = Array.from({ length: count }, () => {
+      const bvx = (Math.random() - 0.5) * 0.08;
+      const bvy = (Math.random() - 0.5) * 0.08;
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: bvx, vy: bvy,
+        bvx, bvy,
+        size: Math.random() * 1.4 + 0.4,
+        opacity: Math.random() * 0.45 + 0.15,
+      };
+    });
   }
 
   private onMouseMove = (e: MouseEvent) => {
@@ -88,8 +93,9 @@ export class ParticleBgComponent implements OnInit, OnDestroy {
         p.vy += (dy / dist) * f;
       }
 
-      // Dampen + move
-      p.vx *= 0.98; p.vy *= 0.98;
+      // Drift back toward base velocity so particles always keep moving
+      p.vx = p.vx * 0.96 + p.bvx * 0.04;
+      p.vy = p.vy * 0.96 + p.bvy * 0.04;
       p.x  += p.vx; p.y  += p.vy;
 
       // Wrap edges
