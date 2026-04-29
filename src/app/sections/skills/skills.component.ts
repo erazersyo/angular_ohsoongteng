@@ -14,17 +14,17 @@ export class SkillsComponent implements OnInit {
   langService = inject(LanguageService);
 
   skills = [
-    { name: 'Angular',       icon: 'assets/angular.png'  },
-    { name: 'Vue',           icon: 'assets/vue.png'       },
-    { name: 'JavaScript',    icon: 'assets/js.png'        },
-    { name: 'TypeScript',    icon: 'assets/typescript.png'},
-    { name: 'HTML5',         icon: 'assets/html.png'      },
-    { name: 'CSS3',          icon: 'assets/css.png'       },
-    { name: 'Node.js',       icon: 'assets/node.png'      },
-    { name: 'MySQL',         icon: 'assets/mysql.png'     },
-    { name: 'MongoDB',       icon: 'assets/mongodb.png'   },
-    { name: 'GitLab',        icon: 'assets/gitlab.png'    },
-    { name: 'Google Cloud',  icon: 'assets/gcp.png'       },
+    { name: 'Angular',       icon: 'assets/angular.svg'  },
+    { name: 'Vue',           icon: 'assets/vue.svg'       },
+    { name: 'JavaScript',    icon: 'assets/js.svg'        },
+    { name: 'TypeScript',    icon: 'assets/typescript.svg'},
+    { name: 'HTML5',         icon: 'assets/html.svg'      },
+    { name: 'CSS3',          icon: 'assets/css.svg'       },
+    { name: 'Node.js',       icon: 'assets/node.svg'      },
+    { name: 'MySQL',         icon: 'assets/mysql.svg'     },
+    { name: 'MongoDB',       icon: 'assets/mongodb.svg'   },
+    { name: 'GitLab',        icon: 'assets/gitlab.svg'    },
+    { name: 'Google Cloud',  icon: 'assets/gcp.svg'       },
   ];
 
   visible = false;
