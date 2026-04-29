@@ -14,47 +14,83 @@
           <label for="name">{{ langService.t('contact.nameLabel') }}</label>
           <input id="name" type="text"
             [placeholder]="langService.t('contact.namePlaceholder')"
-            [(ngModel)]="formData.name" name="name" />
+            [(ngModel)]="formData.name" name="name"
+            [disabled]="status === 'sending'" />
         </div>
         <div class="form-group">
           <label for="email">{{ langService.t('contact.emailLabel') }}</label>
           <input id="email" type="email"
             placeholder="your@email.com"
-            [(ngModel)]="formData.email" name="email" />
+            [(ngModel)]="formData.email" name="email"
+            [disabled]="status === 'sending'" />
         </div>
       </div>
       <div class="form-group">
         <label for="message">{{ langService.t('contact.messageLabel') }}</label>
         <textarea id="message"
           [placeholder]="langService.t('contact.messagePlaceholder')"
-          [(ngModel)]="formData.message" name="message"></textarea>
+          [(ngModel)]="formData.message" name="message"
+          [disabled]="status === 'sending'"></textarea>
       </div>
-      <button type="submit" class="send-btn">
-        {{ langService.t('contact.sendBtn') }}
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+
+      <button type="submit" class="send-btn"
+        [class.sending]="status === 'sending'"
+        [class.success]="status === 'success'"
+        [class.error]="status === 'error'"
+        [disabled]="status === 'sending'">
+
+        <!-- Idle -->
+        <ng-container *ngIf="status === 'idle'">
+          {{ langService.t('contact.sendBtn') }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </ng-container>
+
+        <!-- Sending -->
+        <ng-container *ngIf="status === 'sending'">
+          <span class="spinner"></span>
+          Sending...
+        </ng-container>
+
+        <!-- Success -->
+        <ng-container *ngIf="status === 'success'">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+            <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Message Sent!
+        </ng-container>
+
+        <!-- Error -->
+        <ng-container *ngIf="status === 'error'">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Failed — Try Again
+        </ng-container>
+
       </button>
     </form>
 
     <div class="social-links">
       <p class="or-text">{{ langService.t('contact.orText') }}</p>
       <div class="socials">
-        <a href="https://github.com" target="_blank" class="social-card">
+        <a href="https://github.com/erazersyo" target="_blank" rel="noopener noreferrer" class="social-card">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.09.68-.22.68-.49 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.38 9.38 0 0112 6.84c.85.004 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.59.69.49C19.13 20.65 22 16.8 22 12.26 22 6.58 17.52 2 12 2z"/>
           </svg>
           GitHub
         </a>
-        <a href="https://linkedin.com" target="_blank" class="social-card">
+        <a href="https://www.linkedin.com/in/oh-soong-teng-2746651ab/" target="_blank" rel="noopener noreferrer" class="social-card">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
             <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
             <circle cx="4" cy="4" r="2"/>
           </svg>
           LinkedIn
         </a>
-        <a href="mailto:ohsoongteng@gmail.com" class="social-card">
+        <a href="mailto:ohst33@gmail.com" class="social-card">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
             <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/>
             <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
