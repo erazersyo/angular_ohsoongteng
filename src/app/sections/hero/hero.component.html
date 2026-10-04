@@ -27,7 +27,7 @@
         <a [href]="resumeHref" target="_blank" rel="noopener" class="btn btn-primary">
           {{ langService.t('hero.viewResume') }}
         </a>
-        <a href="#contact" class="btn btn-secondary">
+        <a href="#contact" class="btn btn-secondary" (click)="scrollToSection($event, 'contact')">
           {{ langService.t('hero.getInTouch') }}
         </a>
         <a routerLink="/journey" class="btn btn-journey">

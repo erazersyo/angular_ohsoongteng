@@ -2,20 +2,14 @@
   <div class="logo">Oh Soong Teng<span>.</span></div>
 
   <ul class="nav-links" [class.open]="menuOpen">
-    <li><a href="#home"       (click)="close()">{{ langService.t('nav.home')       }}</a></li>
-    <li><a href="#skills"     (click)="close()">{{ langService.t('nav.skills')     }}</a></li>
-    <li><a href="#experience" (click)="close()">{{ langService.t('nav.experience') }}</a></li>
-    <li><a href="#projects"   (click)="close()">{{ langService.t('nav.projects')   }}</a></li>
-    <li><a href="#contact"    (click)="close()">{{ langService.t('nav.contact')    }}</a></li>
+    <li><a href="#home"       (click)="scrollToSection($event, 'home')">{{ langService.t('nav.home')       }}</a></li>
+    <li><a href="#experience" (click)="scrollToSection($event, 'experience')">{{ langService.t('nav.experience') }}</a></li>
+    <li><a href="#skills"     (click)="scrollToSection($event, 'skills')">{{ langService.t('nav.skills')     }}</a></li>
+    <li><a href="#projects"   (click)="scrollToSection($event, 'projects')">{{ langService.t('nav.projects')   }}</a></li>
+    <li><a href="#contact"    (click)="scrollToSection($event, 'contact')">{{ langService.t('nav.contact')    }}</a></li>
   </ul>
 
   <div class="nav-right">
-    <div class="lang-toggle" aria-label="Switch language">
-      <span class="lang-en" [class.active]="langService.lang() === 'en'" (click)="langService.setLang('en')">EN</span>
-      <span class="sep">|</span>
-      <span class="lang-ja" [class.active]="langService.lang() === 'ja'" (click)="langService.setLang('ja')">JP</span>
-    </div>
-
     <button class="hamburger" (click)="toggle()" [class.active]="menuOpen" aria-label="Menu">
       <span></span>
       <span></span>

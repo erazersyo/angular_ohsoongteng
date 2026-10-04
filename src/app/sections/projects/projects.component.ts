@@ -22,7 +22,7 @@ export class ProjectsComponent implements OnInit {
         'Modern Angular portfolio with responsive sections, scroll-triggered animations, typewriter effects, and a sleek dark space theme.',
       descriptionJa:
         'レスポンシブデザイン、スクロールアニメーション、タイプライター効果、ダークテーマを採用したモダンなAngularポートフォリオサイト。',
-      tech: ['Angular', 'TypeScript', 'SCSS', 'GSAP'],
+      tech: ['Angular', 'TypeScript', 'SCSS'],
       github: '',
       demo: '',
     },

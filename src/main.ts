@@ -2,8 +2,8 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 
-// Prevent browser from restoring scroll position on refresh
-history.scrollRestoration = 'manual';
+// Let hash links and normal scrolling work correctly.
+history.scrollRestoration = 'auto';
 window.scrollTo(0, 0);
 
 bootstrapApplication(AppComponent, appConfig)

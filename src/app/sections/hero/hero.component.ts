@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject, effect } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LanguageService } from '../../services/language.service';
@@ -13,32 +13,16 @@ import { LanguageService } from '../../services/language.service';
 export class HeroComponent implements OnInit, OnDestroy {
   langService = inject(LanguageService);
 
-  private rolesEn = ['Software Developer', 'System Engineer', 'Frontend Engineer'];
-  private rolesJa = ['ソフトウェアデベロッパー', 'システムエンジニア', 'フロントエンドエンジニア'];
+  private roles = ['Software Developer', 'System Engineer', 'Frontend Engineer'];
 
   currentRole = '';
   private roleIndex = 0;
   private charIndex = 0;
   private isDeleting = false;
   private timer: any;
-  private prevLang: 'en' | 'ja' | null = null;
-
-  constructor() {
-    effect(() => {
-      const lang = this.langService.lang();
-      if (this.prevLang !== null && this.prevLang !== lang) {
-        this.restartTypewriter();
-      }
-      this.prevLang = lang;
-    });
-  }
-
-  get roles() {
-    return this.langService.lang() === 'ja' ? this.rolesJa : this.rolesEn;
-  }
 
   get resumeHref() {
-    return this.langService.lang() === 'ja' ? 'assets/resume-ja.pdf' : 'assets/resume.pdf';
+    return 'assets/resume.pdf';
   }
 
   ngOnInit() {
@@ -49,13 +33,22 @@ export class HeroComponent implements OnInit, OnDestroy {
     clearTimeout(this.timer);
   }
 
-  private restartTypewriter() {
-    clearTimeout(this.timer);
-    this.currentRole = '';
-    this.roleIndex = 0;
-    this.charIndex = 0;
-    this.isDeleting = false;
-    this.timer = setTimeout(() => this.typeRole(), 300);
+  scrollToSection(event: Event, sectionId: string) {
+    event.preventDefault();
+
+    const element = document.getElementById(sectionId);
+    if (!element) {
+      window.location.hash = sectionId;
+      return;
+    }
+
+    const offset = 90;
+    const top = element.getBoundingClientRect().top + window.scrollY - offset;
+
+    window.scrollTo({
+      top,
+      behavior: 'smooth',
+    });
   }
 
   private typeRole() {

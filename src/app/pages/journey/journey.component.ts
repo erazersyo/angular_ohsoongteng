@@ -117,18 +117,18 @@ export class JourneyComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // ── Replace src values with your actual photo paths (e.g. 'assets/photos/tokyo.jpg') ──
   photos: LifePhoto[] = [
-    { src: 'assets/photos/photo-1.jpg', alt: 'Photo 1',  caption: 'A moment in time',       tag: 'Life'   },
-    { src: 'assets/photos/photo-2.jpg', alt: 'Photo 2',  caption: 'Exploring new places',   tag: 'Travel' },
-    { src: 'assets/photos/photo-3.jpg', alt: 'Photo 3',  caption: 'Good memories',           tag: 'Memory' },
-    { src: 'assets/photos/photo-4.jpg', alt: 'Photo 4',  caption: 'Tokyo adventures',        tag: 'Travel' },
-    { src: 'assets/photos/photo-5.jpg', alt: 'Photo 5',  caption: 'Life is good',            tag: 'Life'   },
-    { src: 'assets/photos/photo-6.jpg', alt: 'Photo 6',  caption: 'Work hard, travel more', tag: 'Work'   },
-    { src: 'assets/photos/photo-7.jpg', alt: 'Photo 7',  caption: 'Weekend vibes',           tag: 'Life'   },
-    { src: 'assets/photos/photo-8.jpg', alt: 'Photo 8',  caption: 'New horizons',            tag: 'Travel' },
-    { src: 'assets/photos/photo-9.jpg', alt: 'Photo 9',  caption: 'Unforgettable moments',   tag: 'Memory' },
-    { src: 'assets/photos/photo-10.jpg',alt: 'Photo 10', caption: 'City lights',             tag: 'Travel' },
-    { src: 'assets/photos/photo-11.jpg',alt: 'Photo 11', caption: 'Just living',             tag: 'Life'   },
-    { src: 'assets/photos/photo-12.jpg',alt: 'Photo 12', caption: 'The journey continues',  tag: 'Memory' },
+    { src: 'assets/photos/photo-1.jpg', alt: 'Photo 1',  caption: 'Chapter closed: Form 6 edition',       tag: 'Life'   },
+    { src: 'assets/photos/photo-2.jpg', alt: 'Photo 2',  caption: 'Chapter complete 🎓',   tag: 'Life' },
+    { src: 'assets/photos/photo-3.jpg', alt: 'Photo 3',  caption: 'Hakone state of mind',           tag: 'Travel' },
+    { src: 'assets/photos/photo-4.jpg', alt: 'Photo 4',  caption: 'Pure farm joy',        tag: 'Memory' },
+    { src: 'assets/photos/photo-5.jpg', alt: 'Photo 5',  caption: 'Hello, sakura seasons',  tag: 'Memory'   },
+    { src: 'assets/photos/photo-6.jpg', alt: 'Photo 6',  caption: 'Blue looks good on me', tag: 'Memory'   },
+    { src: 'assets/photos/photo-7.jpg', alt: 'Photo 7',  caption: 'Red brick and bright lights',  tag: 'Life'   },
+    { src: 'assets/photos/photo-8.jpg', alt: 'Photo 8',  caption: 'Lost in the blossom',  tag: 'Travel' },
+    { src: 'assets/photos/photo-9.jpg', alt: 'Photo 9',  caption: 'Kobe calling',   tag: 'Travel' },
+    { src: 'assets/photos/photo-10.jpg',alt: 'Photo 10', caption: 'Tokyo City lights',   tag: 'Travel' },
+    { src: 'assets/photos/photo-11.jpg',alt: 'Photo 11', caption: 'Lost in Nagoya, found by a cat',   tag: 'Travel'   },
+    { src: 'assets/photos/photo-12.jpg',alt: 'Photo 12', caption: 'Ready for my show!',  tag: 'Life' },
   ];
 
   // Split into two rows for opposite-direction scroll

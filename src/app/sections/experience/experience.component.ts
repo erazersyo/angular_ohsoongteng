@@ -22,8 +22,8 @@ export class ExperienceComponent implements OnInit {
       logo: 'assets/logos/agilet.png',
       role: 'System Engineer',
       roleJa: 'システムエンジニア',
-      period: 'Sep 2024 – Present',
-      periodJa: '2024年9月〜現在',
+      period: 'July 2024 – Present',
+      periodJa: '2024年7月〜現在',
       description:
         'Building enterprise software systems in Japan, collaborating across multicultural teams to deliver scalable, high-quality solutions.',
       descriptionJa:

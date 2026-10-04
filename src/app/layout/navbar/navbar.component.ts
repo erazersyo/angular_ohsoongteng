@@ -24,6 +24,25 @@ export class NavbarComponent {
     this.menuOpen = !this.menuOpen;
   }
 
+  scrollToSection(event: Event, sectionId: string) {
+    event.preventDefault();
+    this.close();
+
+    const element = document.getElementById(sectionId);
+    if (!element) {
+      window.location.hash = sectionId;
+      return;
+    }
+
+    const offset = 90;
+    const top = element.getBoundingClientRect().top + window.scrollY - offset;
+
+    window.scrollTo({
+      top,
+      behavior: 'smooth',
+    });
+  }
+
   close() {
     this.menuOpen = false;
   }
